@@ -26,3 +26,4 @@ docker run --envs GCP_PROJECT=gcp-project-id -p 8080:8080 mlflow
 - [mlflow-for-gcp](https://github.com/dlabsai/mlflow-for-gcp/tree/master)
 
 - [A Step-by-step Guide To Setting Up MLflow On The Google Cloud Platform](https://dlabs.ai/blog/a-step-by-step-guide-to-setting-up-mlflow-on-the-google-cloud-platform/)
+- [How to setup MLflow on Ubuntu](https://medium.com/data-folks-indonesia/how-to-setup-mlflow-in-ubuntu-d79ce47bee2e)
