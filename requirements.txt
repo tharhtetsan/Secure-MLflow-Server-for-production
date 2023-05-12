@@ -1,0 +1,8 @@
+google-cloud-storage
+google-cloud-secret-manager
+mlflow
+click
+pg8000
+wsgi-basic-auth
+gunicorn
+psycopg2-binary

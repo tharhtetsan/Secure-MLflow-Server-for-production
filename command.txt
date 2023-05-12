@@ -1,0 +1,6 @@
+python get_secret.py --project=medicare-e7232 --secret=mlflow_tracking_username
+python get_secret.py --project=medicare-e7232 --secret=mlflow_tracking_password
+python get_secret.py --project=medicare-e7232 --secret=mlflow_artifact_url
+python get_secret.py --project=medicare-e7232  --secret=mlflow_database_url
+
+mlflow ui --backend-store-uri postgresql://postgres:mlflow-postgresadmin@34.28.139.122 -h 0.0.0.0 -p 8888
