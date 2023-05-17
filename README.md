@@ -2,7 +2,7 @@
 
 
 
-![](images\secure_mlflow_server.png)
+![](images/secure_mlflow_server.png)
 
 
 ### Secret Mananger
