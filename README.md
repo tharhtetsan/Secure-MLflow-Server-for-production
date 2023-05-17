@@ -1,5 +1,11 @@
 # Secure mlflow server setup for production
 
+
+
+![](images\secure_mlflow_server.png)
+
+
+
 ### Secret Mananger
 
 In *Secret Manager* you need to configure secrets that the `mlflow` image will retrieve at boot time:
