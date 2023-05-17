@@ -1,8 +1,8 @@
-# Secure mlflow server setup for production
+# Secure MLflow server setup for production
 
 
 
-![](images\secure_mlflow_server.png)
+![](images\secure_mlflow_server.PNG)
 
 
 
