@@ -15,14 +15,57 @@ In *Secret Manager* you need to configure secrets that the `mlflow` image will r
 - `mlflow_tracking_password` - the basic HTTP auth password for `mlflow`, your choice
 
 
-
-#### Usage
-
-```shell
-docker build . -t mlflow
-
-docker run --envs GCP_PROJECT=gcp-project-id -p 8080:8080 mlflow
+#### Test mlflow locally first
+```bash
+# test mlflow with your custom artifcat store and database
+mlflow ui  --host 127.0.0.1 --port 8080 --default-artifact-root gs://YOUR_GCP_BUCKETNAME  --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
 ```
+
+
+
+#### Test secret manager keys
+```bash
+sudo python get_secret.py --project ml-in-prod-b1 --secret mlflow_tracking_username
+```
+
+#### Test CloudSQL DB with custom backend uri
+```bash
+## Postgres SQL backend with  pg8000 driver
+mlflow ui  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+pg8000://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
+
+## Postgres SQL backend with  psycopg2 driver
+mlflow ui  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
+```
+
+#### Build the image and push to Artifcat registry 
+```shell
+
+
+# gcloud commands
+export PATH="/Users/tharhtet/google-cloud-sdk/bin:$PATH"
+sudo gcloud auth login
+
+# build image
+docker build . -t mlflow:latest
+
+# tag image
+docker tag mlflow:latest us-central1-docker.pkg.dev/ml-in-prod-b1/cloud-run-source-deploy/mlflow:latest
+
+# push image
+sudo docker push us-central1-docker.pkg.dev/ml-in-prod-b1/cloud-run-source-deploy/mlflow:latest
+
+
+```
+
+#### Run Locally first
+```bash
+
+docker run --env GCP_PROJECT=ml-in-prod-b1 -p 8080:8080 mlflow
+```
+
+If you can locally run, you can now deploy with any cloud service.
+Happy Learning!
+
 
 
 

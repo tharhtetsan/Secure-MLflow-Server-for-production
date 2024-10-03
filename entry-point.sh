@@ -8,10 +8,15 @@ if [[ -z "${GCP_PROJECT}" ]]; then
     exit 1
 fi
 
+export GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
+echo $GOOGLE_APPLICATION_CREDENTIALS
+
 # Fetch secrets from Secret Manager in CGP
 export MLFLOW_TRACKING_USERNAME="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_tracking_username)"
 export MLFLOW_TRACKING_PASSWORD="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_tracking_password)"
 export ARTIFACT_URL="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_artifact_url)"
+export DATABASE_URL="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_database_url)"
+
 if [[ -z "${DATABASE_URL}" ]]; then # Allow overriding for local deployment
     export DATABASE_URL="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_database_url)"
 fi
@@ -46,8 +51,6 @@ if [[ -z "${HOST}" ]]; then
 fi
 
 export WSGI_AUTH_CREDENTIALS="${MLFLOW_TRACKING_USERNAME}:${MLFLOW_TRACKING_PASSWORD}"
-export _MLFLOW_SERVER_ARTIFACT_ROOT="${ARTIFACT_URL}"
-export _MLFLOW_SERVER_FILE_STORE="${DATABASE_URL}"
 
 # Start MLflow and ngingx using supervisor
-exec gunicorn -b "${HOST}:${PORT}" -w 4 --log-level debug --access-logfile=- --error-logfile=- --log-level=debug mlflow_auth:app
+exec  mlflow server  --host 0.0.0.0 --port 8080 --default-artifact-root ${ARTIFACT_URL}  --backend-store-uri ${DATABASE_URL}
