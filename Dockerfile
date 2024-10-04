@@ -9,7 +9,9 @@ COPY . /app
 
 COPY ./requirements.txt ./requirements.txt
 
-ENV GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
+
+# uncomment for local developement setup.
+# ENV GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
 
 
 # pandas installed from ubuntu repos to avoid building C extensions
