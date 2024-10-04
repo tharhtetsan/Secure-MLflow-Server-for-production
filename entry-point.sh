@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-#set -e
+set -e
 
 # Verify that all required variables are set
 if [[ -z "${GCP_PROJECT}" ]]; then
@@ -9,7 +9,7 @@ if [[ -z "${GCP_PROJECT}" ]]; then
 fi
 
 #export GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
-#echo $GOOGLE_APPLICATION_CREDENTIALS
+echo $GOOGLE_APPLICATION_CREDENTIALS
 
 # Fetch secrets from Secret Manager in CGP
 export MLFLOW_TRACKING_USERNAME="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_tracking_username)"
@@ -51,6 +51,9 @@ if [[ -z "${HOST}" ]]; then
 fi
 
 export WSGI_AUTH_CREDENTIALS="${MLFLOW_TRACKING_USERNAME}:${MLFLOW_TRACKING_PASSWORD}"
+echo "Starting MLflow server"
+echo $ARTIFACT_URL
+echo $DATABASE_URL
 
 # Start MLflow and ngingx using supervisor
-exec  mlflow server  --host 0.0.0.0 --port 8080 --default-artifact-root ${ARTIFACT_URL}  --backend-store-uri ${DATABASE_URL}
+exec  mlflow ui  --host 0.0.0.0 --port 8080 --default-artifact-root ${ARTIFACT_URL}  --backend-store-uri ${DATABASE_URL}
