@@ -15,3 +15,6 @@ steps:
 
 images:
 - "$_AR_HOSTNAME/$_PROJECT_ID/cloud-run-source-deploy/$_IMAGE_NAME:$_SERVER"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
