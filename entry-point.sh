@@ -8,8 +8,8 @@ if [[ -z "${GCP_PROJECT}" ]]; then
     exit 1
 fi
 
-export GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
-echo $GOOGLE_APPLICATION_CREDENTIALS
+#export GOOGLE_APPLICATION_CREDENTIALS="/app/credentials/serviceAccount.json"
+#echo $GOOGLE_APPLICATION_CREDENTIALS
 
 # Fetch secrets from Secret Manager in CGP
 export MLFLOW_TRACKING_USERNAME="$(python3 /app/get_secret.py --project="${GCP_PROJECT}" --secret=mlflow_tracking_username)"
