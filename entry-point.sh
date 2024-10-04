@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -e
+#set -e
 
 # Verify that all required variables are set
 if [[ -z "${GCP_PROJECT}" ]]; then
