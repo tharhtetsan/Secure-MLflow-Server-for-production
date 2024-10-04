@@ -153,7 +153,4 @@ cython_debug/
 
 /mlruns
 .DS_Store
-credentials/serviceAccount.json
-credentials/serviceAccount.json
-credentials/serviceAccount.json
-credentials/serviceAccount.json
+./credentials/serviceAccount.json
