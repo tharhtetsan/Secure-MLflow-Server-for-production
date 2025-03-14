@@ -18,7 +18,7 @@ In *Secret Manager* you need to configure secrets that the `mlflow` image will r
 #### Test mlflow locally first
 ```bash
 # test mlflow with your custom artifcat store and database
-mlflow server  --host 127.0.0.1 --port 8080 --default-artifact-root gs://YOUR_GCP_BUCKETNAME  --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
+sudo mlflow server  --host 127.0.0.1 --port 8080 --default-artifact-root gs://YOUR_GCP_BUCKETNAME  --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
 ```
 
 
@@ -31,10 +31,10 @@ sudo python get_secret.py --project ml-in-prod-b1 --secret mlflow_tracking_usern
 #### Test CloudSQL DB with custom backend uri
 ```bash
 ## Postgres SQL backend with  pg8000 driver
-mlflow server  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+pg8000://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
+sudo mlflow server  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+pg8000://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
 
 ## Postgres SQL backend with  psycopg2 driver
-mlflow server  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
+sudo mlflow server  --host 127.0.0.1 --port 8080 --backend-store-uri postgresql+psycopg2://DB_USERNAME:DB_PASSWORD@DB_IP:5432/DB_NAME
 ```
 
 #### Build the image and push to Artifcat registry 
